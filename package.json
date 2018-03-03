@@ -1,0 +1,25 @@
+{
+  "name": "basictodoreactapp",
+  "version": "1.0.0",
+  "description": "Building a basic todo app to practice react.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majorazero/basicToDoReactApp.git"
+  },
+  "author": "Daniel Hsu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/majorazero/basicToDoReactApp/issues"
+  },
+  "homepage": "https://github.com/majorazero/basicToDoReactApp#readme",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "jquery": "^3.3.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
