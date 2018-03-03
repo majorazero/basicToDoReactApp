@@ -1,5 +1,5 @@
-let React = require('react');
-let ReactDOM = require('react-dom');
+ // let React = require('react');
+ // let ReactDOM = require('react-dom');
 
 class Page extends React.Component {
 
@@ -25,7 +25,7 @@ class Page extends React.Component {
 jQuery(function(){
   ReactDOM.render(
     <Page />,
-    document.getElementID('page')
+    document.getElementById('page')
   );
 
-})
+});
