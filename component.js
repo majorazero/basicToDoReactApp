@@ -6,22 +6,38 @@ class Page extends React.Component {
     };
   }
   render(){
+    //calls the custom function to parse your array.
+    const lists = this._getLists();
     return (
-    <div>
-      <h2> Your TO-DO List! </h2>
-      <div>
-        <List />
-        <ListForm />
+    <div className = "box">
+      <div className = "wrapper">
+        <h2> Your TO-DO List! </h2>
+        <div className = "listObj"> Your Lists </div>
+        <div>{lists}</div>
+        <div>
+          <div className = "bars"></div>
+          {/*Passed the _addList function to the ListForm child component as a props called "addList"*/}
+          <ListForm addList={this._addList.bind(this)}/>
+        </div>
       </div>
     </div>
     );
   }
+
+  _getLists(){
+    return this.state.lists.map((list) => {
+      return <List
+              key={list.key}
+              title={list.listTitle}
+              desc={list.listDesc}/>
+    });
+  }
   //adds a list to an array of lists
-  _addList(listAuthor,listBody){
+  _addList(listTitle,listDesc){
     let list = {
-      author: listAuthor,
-      body: listBody,
-      id: this.state.lists.length+1
+      title: listTitle,
+      desc: listDesc,
+      key: this.state.lists.length+1
     };
     this.setState({
       //will add the new list to the end of list object.
@@ -31,33 +47,46 @@ class Page extends React.Component {
 }
 
 class List extends React.Component {
-
   render(){
     return(
       <div>
-        <div> I am a list. </div>
+        <p>{this.props.title}</p>
+        <p>Hello.</p>
+        <p>{this.props.desc}</p>
+        <button>DELETE.</button>
       </div>
     );
   }
 }
 
 class ListForm extends React.Component {
-
   render(){
     return(
-    <div>
+    //note that if you don't wrap it all in form, it will not submit properly
+    //call the _handleSubmit function on submit.
+    <form className="lForm" onSubmit={this._handleSubmit.bind(this)}>
       <div className="listform-label">New List</div>
       <div className="listform">
-        <div><input placeholder="List Title:"/></div>
-        <div><textarea placeholder="Description:"/></div>
+        <div><input placeholder="List Title:" ref={title => this._title = title}/></div>
+        <div><textarea placeholder="Description:"ref={body => this._desc = body}/></div>
       </div>
       <div>
-        <button type="submit">
+        <button className="btn-listform"type="submit">
           Add List.
         </button>
       </div>
-    </div>
+    </form>
     );
+  }
+
+  _handleSubmit(event){
+    //prevents page from resetting
+    event.preventDefault();
+    //uses the inherited function
+    this.props.addList(this._title.value,this._desc.value);
+    //reset data here so you can input new data
+    this._title.value = '';
+    this._desc.value = '';
   }
 }
 

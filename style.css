@@ -1,19 +1,47 @@
 h2{
   background: #B8D864;
   width: 210px;
+  text-align: center;
+}
 
+.box{
+  background: #DEA886;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+}
+.wrapper{
+    /* inline block will allow it to be modified by text-align: center in .box
+    text-align left resets the way text in its wrapper to be displayed since css is cascading */
+    display: inline-block;
+    text-align: left;
+}
+.listObj{
+  background: #729023;
+  width: 210px;
+  text-align: center;
+}
+
+.bars{
+  padding: 9px;
 }
 
 .listform{
   background: #C70039;
-  height: 100px;
   width: 150px;
   text-align: center;
-  padding: 30px;
+  padding-top:5px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .listform-label{
   width: 200px;
   text-align: center;
   background: #64B4D8;
   padding: 5px;
+}
+.btn-listform{
+  background: #D38451;
+  width: 200px;
+  margin-left: 5px;
 }
