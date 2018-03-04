@@ -1,4 +1,12 @@
+/**
+* Class representing the Entire Page.
+* @extends React.Component
+*/
 class Page extends React.Component {
+  /**
+  * @constructor
+  * Gives an array of lists to start with
+  */
   constructor (){
     super();
     this.state = {
@@ -6,7 +14,6 @@ class Page extends React.Component {
     };
   }
   render(){
-    //calls the custom function to parse your array.
     const lists = this._getLists();
     return (
     <div className = "box">
@@ -23,7 +30,9 @@ class Page extends React.Component {
     </div>
     );
   }
-  //the function of getting the list.
+  /**
+  * Passes the array of list objects to the List component and pass values over as props
+  */
   _getLists(){
     return this.state.lists.map((list) => {
       return <List
@@ -34,6 +43,10 @@ class Page extends React.Component {
               deleteList={this._removeList.bind(this)}/>
     });
   }
+  /**
+  * Removes a To-Do list
+  * @param {Integer} id   The id number of the to-do list to be removed.
+  */
   _removeList(id){
     const li = this.state.lists.filter(
       (list) => list.id !== id
@@ -42,7 +55,11 @@ class Page extends React.Component {
       lists: li
     });
   }
-  //adds a list to an array of lists
+  /**
+  * Adds a To-Do List
+  * @param {String} listTitle The title of the to-do list
+  * @param {String} listDesc The description of what the to-do list is for
+  */
   _addList(listTitle,listDesc){
     const list = {
       title: listTitle,
@@ -50,13 +67,19 @@ class Page extends React.Component {
       id: this.state.lists.length+1
     };
     this.setState({
-      //will add the new list to the end of list object.
       lists: this.state.lists.concat([list])
     });
   }
 }
-
+/**
+* Class representing a specific To-Do List.
+* @extends React.Component
+*/
 class List extends React.Component {
+  /**
+  * @constructor
+  * starts with an empty array of items.
+  */
   constructor(){
     super();
     this.state = {
@@ -83,24 +106,39 @@ class List extends React.Component {
       </div>
     );
   }
+  /**
+  * handles delete List event
+  * @param {SyntheticEvent} event
+  */
   _handleDeleteList(event){
     event.preventDefault();
     this.props.deleteList(this.props.id);
   }
+  /**
+  * Removes item from the items array
+  * @param {Integer} itemId The id of the item to be removed
+  */
+  _removeThis(itemId){
+    const item = this.state.items.filter(
+      (item) => item.id !== itemId
+    );
+    this.setState({
+      items: item
+    });
+  }
+  /**
+  * handles event of adding new items
+  * @param {SyntheticEvent} event
+  */
   _handleItemSubmit(event){
     event.preventDefault();
     this._addItem(this._item.value);
-    this._item = '';
+    this._item.value = '';
   }
-  _getItems(){
-    return this.state.items.map((item) => {
-      return <Item
-              body={item.body}
-              key={item.id}
-              id={item.id}
-              removeThis={this._removeThis.bind(this)}/>
-    });
-  }
+  /**
+  * The actual process that updates the this.state.items array
+  * @param {String} itemBody The item body
+  */
   _addItem(itemBody){
     const item = {
       body: itemBody,
@@ -110,16 +148,23 @@ class List extends React.Component {
       items: this.state.items.concat([item])
     })
   }
-  _removeThis(itemId){
-    const item = this.state.items.filter(
-      (item) => item.id !== itemId
-    );
-    this.setState({
-      items: item
+  /**
+  * Maps the items for the List and passes props to the Item Component
+  */
+  _getItems(){
+    return this.state.items.map((item) => {
+      return <Item
+              body={item.body}
+              key={item.id}
+              id={item.id}
+              removeThis={this._removeThis.bind(this)}/>
     });
   }
 }
-
+/**
+* Class representing a specific Item in a to-do-list
+* @extends React.Component
+*/
 class Item extends React.Component {
   render(){
     return (
@@ -129,17 +174,22 @@ class Item extends React.Component {
       </div>
     );
   }
+  /**
+  * handles event of removing an item
+  * @param {SyntheticEvent} event
+  */
   _removeItem(event){
     event.preventDefault();
     this.props.removeThis(this.props.id);
   }
 }
-
+/**
+* Class representing adding the secton of adding new to-do lists
+* @extends React.Component
+*/
 class ListForm extends React.Component {
   render(){
     return(
-    //note that if you don't wrap it all in form, it will not submit properly
-    //call the _handleSubmit function on submit.
     <form className="lForm" onSubmit={this._handleSubmit.bind(this)}>
       <div className="listform-label">New List</div>
       <div className="listform">
@@ -154,7 +204,10 @@ class ListForm extends React.Component {
     </form>
     );
   }
-
+  /**
+  * handles the submit new form event
+  * @param {SyntheticEvent} event
+  */
   _handleSubmit(event){
     //prevents page from resetting
     event.preventDefault();
@@ -165,7 +218,9 @@ class ListForm extends React.Component {
     this._desc.value = '';
   }
 }
-
+/**
+* Renders the Page component to an associated container in the index.html
+*/
 jQuery(function(){
   ReactDOM.render(
     <Page />,
