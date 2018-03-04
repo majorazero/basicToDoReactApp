@@ -1,0 +1,19 @@
+h2{
+  background: #B8D864;
+  width: 210px;
+
+}
+
+.listform{
+  background: #C70039;
+  height: 100px;
+  width: 150px;
+  text-align: center;
+  padding: 30px;
+}
+.listform-label{
+  width: 200px;
+  text-align: center;
+  background: #64B4D8;
+  padding: 5px;
+}
