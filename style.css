@@ -26,6 +26,29 @@ h2{
   padding: 9px;
 }
 
+.list-box{
+  text-align: center;
+}
+.list-wrapper{
+  min-width: 200px;
+  display: inline-block;
+  text-align: left;
+}
+.list-title{
+  background: #86A2DE;
+  text-align: center;
+  padding: 5px;
+}
+.list-desc{
+  background: #6077A8;
+  text-align: center;
+  padding: 2px;
+}
+.btn-delete-list{
+  background: #C2D1EF;
+  text-align: center;
+}
+
 .listform{
   background: #C70039;
   width: 150px;

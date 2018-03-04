@@ -49,10 +49,12 @@ class Page extends React.Component {
 class List extends React.Component {
   render(){
     return(
-      <div>
-        <p>{this.props.title}</p>
-        <p>{this.props.desc}</p>
-        <button>DELETE.</button>
+      <div className="list-box">
+        <div className = "list-wrapper">
+          <div className="list-title">{this.props.title}</div>
+          <div className="list-desc">{this.props.desc}</div>
+          <button className="btn-delete-list">DELETE.</button>
+        </div>
       </div>
     );
   }
