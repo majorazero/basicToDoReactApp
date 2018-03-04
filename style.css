@@ -44,6 +44,10 @@ h2{
   text-align: center;
   padding: 2px;
 }
+.btn-add-list{
+  background: #9FA05D;
+  text-align: center;
+}
 .btn-delete-list{
   background: #C2D1EF;
   text-align: center;

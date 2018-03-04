@@ -2,7 +2,7 @@ class Page extends React.Component {
   constructor (){
     super();
     this.state = {
-      lists: []
+      lists: [{title:"Womp", desc:"yep"}]
     };
   }
   render(){
@@ -23,11 +23,11 @@ class Page extends React.Component {
     </div>
     );
   }
-
+  //the function of getting the list.
   _getLists(){
     return this.state.lists.map((list) => {
       return <List
-              key={list.key}
+              key={list.id}
               title={list.title}
               desc={list.desc}/>
     });
@@ -37,7 +37,7 @@ class Page extends React.Component {
     const list = {
       title: listTitle,
       desc: listDesc,
-      key: this.state.lists.length+1
+      id: this.state.lists.length+1
     };
     this.setState({
       //will add the new list to the end of list object.
@@ -47,16 +47,65 @@ class Page extends React.Component {
 }
 
 class List extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      items: [{body:"whoa",id:1}]
+    };
+  }
   render(){
+    const items = this._getItems();
     return(
       <div className="list-box">
         <div className = "list-wrapper">
           <div className="list-title">{this.props.title}</div>
           <div className="list-desc">{this.props.desc}</div>
-          <button className="btn-delete-list">DELETE.</button>
+          <div>{items}</div>
+          <button className="btn-add-list">Add Item.</button>
+          <button className="btn-delete-list">Delete List.</button>
         </div>
       </div>
     );
+  }
+  _getItems(){
+    return this.state.items.map((item) => {
+      return <Item
+              body={item.body}
+              key={item.id}
+              removeThis={this._removeThis.bind(this)}
+      />
+    });
+  }
+  _addItem(itemBody){
+    const item = {
+      body: itemBody,
+      id: this.state.items.length+1
+    }
+    this.setState({
+      items: this.state.items.concat([item])
+    })
+  }
+  _removeThis(itemId){
+    const item = this.state.items.filter(
+      (item) => item.id == itemId
+    );
+    this.setState({
+      items: item
+    })
+  }
+}
+
+class Item extends React.Component {
+  render(){
+    return (
+      <div>
+        <button onClick={this._removeItem.bind(this)}>{this.props.body}</button>
+      </div>
+    );
+  }
+  _removeItem(event){
+    event.preventDefault();
+    this.props.removeThis(this.props.id);
   }
 }
 
