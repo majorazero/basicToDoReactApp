@@ -44,13 +44,16 @@ h2{
   text-align: center;
   padding: 2px;
 }
-.btn-add-list{
-  background: #9FA05D;
-  text-align: center;
-}
 .btn-delete-list{
   background: #C2D1EF;
   text-align: center;
+}
+
+.btn-item{
+  background: #AD92C6;
+  text-align: center;
+  width: 200px;
+  padding: 10px 0px 10px 0px;
 }
 
 .listform{
@@ -71,4 +74,8 @@ h2{
   background: #D38451;
   width: 200px;
   margin-left: 5px;
+}
+
+.addItem{
+  width:193px;
 }
