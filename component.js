@@ -28,13 +28,13 @@ class Page extends React.Component {
     return this.state.lists.map((list) => {
       return <List
               key={list.key}
-              title={list.listTitle}
-              desc={list.listDesc}/>
+              title={list.title}
+              desc={list.desc}/>
     });
   }
   //adds a list to an array of lists
   _addList(listTitle,listDesc){
-    let list = {
+    const list = {
       title: listTitle,
       desc: listDesc,
       key: this.state.lists.length+1
@@ -51,7 +51,6 @@ class List extends React.Component {
     return(
       <div>
         <p>{this.props.title}</p>
-        <p>Hello.</p>
         <p>{this.props.desc}</p>
         <button>DELETE.</button>
       </div>
