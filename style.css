@@ -10,6 +10,9 @@ h2{
   max-width: 300px;
   text-align: center;
 }
+.box-wrapper{
+  padding: 5px;
+}
 .wrapper{
     /* inline block will allow it to be modified by text-align: center in .box
     text-align left resets the way text in its wrapper to be displayed since css is cascading */
@@ -47,6 +50,8 @@ h2{
 .btn-delete-list{
   background: #C2D1EF;
   text-align: center;
+  width: 200px;
+
 }
 
 .btn-item{

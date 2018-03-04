@@ -2,7 +2,7 @@ class Page extends React.Component {
   constructor (){
     super();
     this.state = {
-      lists: [{title:"Title Example", desc:"Description Example"}]
+      lists: [{title:"Title Example", desc:"Description Example", id:1}]
     };
   }
   render(){
@@ -30,7 +30,16 @@ class Page extends React.Component {
               key={list.id}
               id={list.id}
               title={list.title}
-              desc={list.desc}/>
+              desc={list.desc}
+              deleteList={this._removeList.bind(this)}/>
+    });
+  }
+  _removeList(id){
+    const li = this.state.lists.filter(
+      (list) => list.id !== id
+    );
+    this.setState({
+      lists: li
     });
   }
   //adds a list to an array of lists
@@ -57,18 +66,26 @@ class List extends React.Component {
   render(){
     const items = this._getItems();
     return(
-      <div className="list-box">
-        <div className = "list-wrapper">
-          <div className="list-title">{this.props.title}</div>
-          <div className="list-desc">{this.props.desc}</div>
-          <div>{items}</div>
-          <form onSubmit={this._handleItemSubmit.bind(this)}>
-            <input className="addItem" placeholder="Add Item." ref={item => this._item = item}/>
-          </form>
-          <button className="btn-delete-list">Delete List.</button>
+      <div className = "box-wrapper">
+        <div className="list-box">
+          <div className = "list-wrapper">
+            <div className="list-title">{this.props.title}</div>
+            <div className="list-desc">{this.props.desc}</div>
+            <div>{items}</div>
+            <form onSubmit={this._handleItemSubmit.bind(this)}>
+              <input className="addItem" placeholder="Add Item." ref={item => this._item = item}/>
+            </form>
+            <form onSubmit={this._handleDeleteList.bind(this)}>
+              <button className="btn-delete-list">Delete List.</button>
+            </form>
+          </div>
         </div>
       </div>
     );
+  }
+  _handleDeleteList(event){
+    event.preventDefault();
+    this.props.deleteList(this.props.id);
   }
   _handleItemSubmit(event){
     event.preventDefault();
@@ -89,7 +106,6 @@ class List extends React.Component {
       body: itemBody,
       id: this.state.items.length+1
     }
-    console.log(item.id);
     this.setState({
       items: this.state.items.concat([item])
     })
@@ -100,7 +116,7 @@ class List extends React.Component {
     );
     this.setState({
       items: item
-    })
+    });
   }
 }
 
